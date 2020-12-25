@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "name": "Sample Dashboard 1",
+    "widgets": [
+      {
+        "component": "pieChartExample",
+        "cols": 6,
+        "rows": 12,
+        "y": 0,
+        "x": 0
+      },
+      {
+        "component": "simpleColumChartExample",
+        "cols": 6,
+        "rows": 6,
+        "y": 5,
+        "x": 0
+      },
+      {
+        "component": "columChartExample",
+        "cols": 6,
+        "rows": 6,
+        "y": 5,
+        "x": 4
+      }
+    ]
+  }
+]

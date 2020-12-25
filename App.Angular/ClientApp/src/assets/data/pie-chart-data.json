@@ -1,0 +1,8 @@
+[
+  {"name":"Firefox", "value":45.0},
+  {"name":"IE", "value": 26.8},
+  {"name":"Chrome", "value": 12.8},
+  {"name":"Safari", "value": 8.5},
+  {"name":"Opera", "value": 6.2},
+  {"name":"Others", "value": 0.7}
+]

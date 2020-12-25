@@ -1,0 +1,18 @@
+
+<app-command-bar>
+
+    <button mat-button class="app-command-bar-button" (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+        Add
+    </button>
+
+</app-command-bar>
+
+<app-data-table [DataTableDefines] ="dataTableDefinitions" [DataSource]="dataSource" [PageInfo]="pageInfo"
+    (OnPageSourceChanged)="OnPageSourceChanged($event)"
+    (OnSearchActions)="OnSearchActions($event)"
+    (OnRowActions)="onRowActions($event)">
+
+</app-data-table>
+    
+

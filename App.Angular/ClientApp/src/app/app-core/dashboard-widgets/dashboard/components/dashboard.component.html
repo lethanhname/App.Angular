@@ -1,0 +1,15 @@
+<gridster
+  [options]="options"
+  style="background-color: transparent;">
+
+  <ng-container *ngFor="let item of items" style="overflow: hidden;">
+
+    <gridster-item [item]="item" class="dashboard-widget">
+
+      <ng-container *ngxComponentOutlet="components[item.component]"></ng-container>
+
+    </gridster-item>
+
+  </ng-container>
+
+</gridster>

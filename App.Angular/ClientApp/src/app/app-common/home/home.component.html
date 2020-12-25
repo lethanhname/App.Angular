@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <form [formGroup]='formGroup' (submit)='onSubmit()'>
+
+        <mat-vertical-stepper [linear]="false" formArrayName="formArray" #stepper>
+            <mat-step formGroupName="0" [stepControl]="formArray?.get([0])" >
+                <ng-template matStepLabel>Tell us about you</ng-template>
+                
+                <mat-form-field>
+                    <mat-label>Business Domain</mat-label>
+                    <mat-select formControlName="domain" required>
+                        <mat-option *ngFor="let item of domains" [value]="item.value">{{item.viewValue}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+               
+            </mat-step>
+            <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" >
+                <ng-template matStepLabel>Do you have any information system?</ng-template>
+                <p>
+                    <mat-slide-toggle formControlName="itSystem" (change)="onChange($event)" color="primary">{{itSystem ? 'Yes' : 'No'}}</mat-slide-toggle>
+                </p>
+                
+                <mat-form-field *ngIf="itSystem">
+                    <mat-label>Your Request</mat-label>
+                    <mat-select formControlName="yourRequest" required>
+                        <mat-option *ngFor="let item of requests" [value]="item.value">{{item.viewValue}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+            </mat-step>
+            <mat-step formGroupName="2" [stepControl]="formArray?.get([2])" >
+                <ng-template matStepLabel>Select your product that you are searching</ng-template>
+                <mat-form-field>
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="productCode" required>
+                    <mat-option *ngFor="let item of products" [value]="item.productCode">{{item.productName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-step>
+            <mat-step formGroupName="3" [stepControl]="formArray?.get([3])" >
+                <ng-template matStepLabel>Do you want to have any detail information of one Vendor?</ng-template>
+                <mat-form-field>
+                    <mat-label>Vendor</mat-label>
+                    <mat-select formControlName="vendorCode" required>
+                    <mat-option *ngFor="let item of vendors" [value]="item.vendorCode">{{item.vendorName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    
+                    <button mat-flat-button color="primary" type="submit">
+                        <mat-icon>search</mat-icon>
+                        <span>Search</span>
+                      </button>
+                      <button mat-flat-button (click)="resetStepper(stepper)">Reset</button>
+                </div>
+            </mat-step>            
+        </mat-vertical-stepper>
+    </form>
+
+
+</div>

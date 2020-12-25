@@ -1,0 +1,61 @@
+[
+  {
+    "Id": "System",
+    "Route": "",
+    "Title": "System",
+    "Icon": "fa fa-tachometer-alt",
+    "Active": false,
+    "Type": "dropdown",
+    "Position": "100",
+    "PermissionCodes": [ "" ],
+    "Submenus": [
+      {
+        "Id": "RoleInquiry",
+        "Route": "security/roles",
+        "Title": "Roles",
+        "Position": "100",
+        "PermissionCodes": [ "" ]
+      },
+      {
+        "Id": "UserInquiry",
+        "Route": "Index",
+        "Title": "Users",
+        "Position": "110",
+        "PermissionCodes": [ "" ]
+      }
+    ]
+  },
+  {
+    "Id": "Product",
+    "Route": "",
+    "Title": "Product",
+    "Icon": "fa fa-tachometer-alt",
+    "Active": false,
+    "Type": "dropdown",
+    "Position": "100",
+    "PermissionCodes": [ "" ],
+    "Submenus": [
+      {
+        "Id": "StockGroup",
+        "Route": "product/stock-group",
+        "Title": "Stock Group",
+        "Position": "100",
+        "PermissionCodes": [ "" ]
+      },
+      {
+        "Id": "StockType",
+        "Route": "product/stock-type",
+        "Title": "Stock Type",
+        "Position": "110",
+        "PermissionCodes": [ "" ]
+      },
+      {
+        "Id": "dashboard",
+        "Route": "dashboard/viewer",
+        "Title": "Dashboard",
+        "Position": "120",
+        "PermissionCodes": [ "" ]
+      }
+    ]
+  }
+]

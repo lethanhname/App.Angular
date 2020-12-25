@@ -1,0 +1,20 @@
+
+<mat-dialog-content>
+    <div class="panel panel-default">
+        <dynamic-form #Child1Form [fields]="regConfig">
+        </dynamic-form>
+        <br/>
+        <div *ngIf="errorMessages.length > 0" class="has-error">
+            <div *ngFor="let errorMessage of errorMessages">
+                <small>{{ errorMessage.description }}</small>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class=".mt-2">
+        <button mat-flat-button color="primary" [disabled]="!Child1Form.form.valid" (click)="onSubmit()">Save</button>
+        <button mat-flat-button (click)="close()">Close</button>
+    </div>
+    
+</mat-dialog-actions>

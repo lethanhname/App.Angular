@@ -1,0 +1,92 @@
+﻿<div>
+    <div class="row">
+        <div class="col-6">
+            
+        </div>
+        <div class="col-6">
+            <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input matInput type="text" [(ngModel)]="searchingText" (keyup.enter)="search()">
+                <button mat-button matSuffix mat-icon-button (click)="search()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+            </mat-form-field>    
+        </div>
+                    
+    </div>
+
+    <div class="table-responsive">
+      
+    <mat-table #table [dataSource]="GridSource" (matSortChange)="onSortChange($event)" matSort>
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+        <!-- Generic column definition -->
+        <ng-container *ngFor="let column of DataTableDefines.columns" [cdkColumnDef]="column.columnDef">
+            <mat-header-cell *cdkHeaderCellDef>
+                <div mat-sort-header>{{ column.header }}</div>
+            </mat-header-cell>
+
+            <mat-cell *cdkCellDef="let row">
+                <span *ngIf="column.dataType == DataColumnType.DateTime">
+                    {{ column.cell(row) | date: column.dataFormat }}
+                </span>
+                <span *ngIf="column.dataType == DataColumnType.Text">
+                    {{ column.cell(row) }}
+                </span>
+                <mat-checkbox *ngIf="column.dataType == DataColumnType.Bool" disabled [checked]="column.cell(row)">
+                </mat-checkbox>
+
+            </mat-cell>
+
+        </ng-container>
+
+        <ng-container *ngIf="DataTableDefines.rowActions.length >0" matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <div class="rowActions">
+                    <div *ngFor="let action of DataTableDefines.rowActions">
+                        <button *ngIf="action.primaryAction" class="mr-2" type="submit" mat-flat-button color="primary"
+                            (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+                    </div>
+                    <ng-container *ngIf="DataTableDefines.showNonePrimaryAction">
+                        <button mat-flat-button [matMenuTriggerFor]="belowMenu">...</button>
+                        <mat-menu #belowMenu="matMenu" yPosition="below">
+                            <ng-container *ngFor="let action of DataTableDefines.rowActions">
+                                <button *ngIf="!action.primaryAction" mat-menu-item
+                                    (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+                            </ng-container>
+                        </mat-menu>
+                    </ng-container>
+
+                </div>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="DataTableDefines.displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: DataTableDefines.displayedColumns;"></mat-row>
+    </mat-table>
+
+    </div>
+    <div>
+        <mat-paginator #paginator [length]="PageInfo == undefined ? 100 : PageInfo.total"
+            [pageSize]="PageInfo == undefined ? 10 : PageInfo.pageSize"
+            [pageSizeOptions]="PageInfo == undefined ? [5,10,20,25,100] : PageInfo.pageSizeOptions"
+            (page)="onPageChange($event)">
+        </mat-paginator>
+
+    </div>
+
+</div>
+

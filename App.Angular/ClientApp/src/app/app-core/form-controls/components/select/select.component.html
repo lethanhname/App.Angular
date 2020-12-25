@@ -1,0 +1,23 @@
+<div class='demo-full-width margin-top' [formGroup]='group' >
+  <ng-select 
+              [items]='itemsBuffer' 
+              [virtualScroll]='true' 
+              [loading]='loading' 
+              [formControlName]='field.name'
+              [bindLabel]='field.selectBindLabel' 
+              [bindValue]='field.selectBindValue'
+              placeholder='Select item' 
+              [typeahead]="selectInput$"
+              appendTo='body' 
+              (scroll)='onScroll($event)' (scrollToEnd)='onScrollToEnd()'>
+<!--             
+    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+      {{item[field.selectBindLabel] + ' (' + item[field.selectBindValue] + ')'}}
+    </ng-template> -->
+
+    <ng-template ng-label-tmp let-item="item">
+      {{item[field.selectBindLabel] + ' (' + item[field.selectBindValue] + ')'}}
+    </ng-template>
+
+  </ng-select>
+</div>

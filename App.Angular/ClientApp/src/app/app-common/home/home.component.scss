@@ -1,0 +1,13 @@
+.mat-stepper-vertical {
+    margin-top: 1px;
+  }
+  
+  .mat-form-field {
+    margin-top: 1px;
+  }
+
+  ::ng-deep .mat-vertical-stepper-content 
+{
+    visibility: visible !important;
+    height: 100% !important;
+}
