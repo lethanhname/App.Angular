@@ -55,8 +55,8 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: bin
-          path: .
+          name: App
+          path: ./bin/*
       - name: Cleanup
         if: always()
         continue-on-error: true
