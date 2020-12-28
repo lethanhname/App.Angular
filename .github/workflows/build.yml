@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: App
-          path: ./bin/*
+          path: ./${{ env.PROJECT_NAME }}/bin/Release
       - name: Cleanup
         if: always()
         continue-on-error: true
