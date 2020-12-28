@@ -37,7 +37,7 @@ namespace App.WebAngular
         {
             Globals.SetRoot(_hostingEnvironment.ContentRootPath, _configuration["Extensions:Path"]);
             Globals.SetServerPath(_configuration["Server:Path"]);
-            
+
             services.AddModules();
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -59,13 +59,13 @@ namespace App.WebAngular
             });
             services.AddTransient<IRazorViewRenderer, RazorViewRenderer>();
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-Token");
-            
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Server API", Version = "v1" });
@@ -133,7 +133,7 @@ namespace App.WebAngular
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            
+
             app.DatabaseMigrate(env);
             app.UseAppModules(env);
         }
