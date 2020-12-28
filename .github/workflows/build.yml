@@ -16,7 +16,7 @@ env:
   GITHUB_FEED: https://nuget.pkg.github.com/lethanhname/
   GITHUB_USER: lethanhnam010490@gmail.com
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NUGET_URL: ${{ secrets.NUGET_URL }}
+#   NUGET_URL: ${{ secrets.NUGET_URL }}
   # Official NuGet Feed settings
 #   NUGET_FEED: https://api.nuget.org/v3/index.json
 #   NUGET_KEY: ${{ secrets.NUGET_KEY }}
@@ -27,6 +27,10 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
     steps:
+      - name: Prep
+        run: |      
+          echo "::set-env name=NUGET_URL::https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+         
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup .NET Core
