@@ -50,34 +50,17 @@ jobs:
       - name: Build
         run: dotnet build -c Release --no-restore
       - name: Test
-        run: dotnet test -c Release
-      - name: Pack
-        if: matrix.os == 'ubuntu-latest'
-        run: dotnet pack -v normal -c Release --no-restore --include-symbols --include-source -p:PackageVersion=$GITHUB_RUN_ID -o nupkg
+        run: dotnet test -c Release      
       - name: Upload Artifact
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: nupkg
-          path: ./nupkg/*.nupkg
+          name: bin
+          path: .
       - name: Cleanup
         if: always()
         continue-on-error: true
         run: |
             dotnet nuget remove source github
-  prerelease:
-    needs: build
-    if: github.ref == 'refs/heads/develop'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: nupkg
-      - name: Push to GitHub Feed
-        run: |
-          for f in ./nupkg/*.nupkg
-          do
-            curl -vX PUT -u "$GITHUB_USER:$GITHUB_TOKEN" -F package=@$f $GITHUB_FEED
-          done
+  
   
