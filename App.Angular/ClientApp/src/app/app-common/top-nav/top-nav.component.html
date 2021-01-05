@@ -4,12 +4,17 @@
     </a>
     <span>ERP Vendor</span>
     <span class="example-spacer"></span>
+
     <a *ngIf="!isUserAuthenticated" mat-icon-button (click)="login()">
         <mat-icon>person</mat-icon>
     </a>
     <span *ngIf="isUserAuthenticated">Hi {{ givenName }}!&nbsp;&nbsp;</span>
 
-    <a mat-icon-button class="example-icon" *ngIf="isUserAuthenticated" (click)="logout()">
+    <a mat-icon-button class="example-icon mr-8" *ngIf="isUserAuthenticated" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
     </a>
+    <mat-slide-toggle (click)="toggleDark()" class="mr-8">
+    </mat-slide-toggle>
+    <mat-icon class="mr-8">bedtime</mat-icon>
+
 </mat-toolbar>

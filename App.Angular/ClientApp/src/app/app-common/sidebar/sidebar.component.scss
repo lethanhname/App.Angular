@@ -1,3 +1,4 @@
+@import '~@angular/material/theming';
 @keyframes swing {
   0% {
     transform: rotate(0deg);
@@ -413,139 +414,150 @@
 
 
 /*------------------------------default theme---------------------------------*/
-$bg-sidebar-wrapper : #fafafa;
-$border-color : #f3f3f3;
-$footer-top-border-color :#fafafa;
-$color:#131212;
-$header-menu-color :#fafafa;
-$hover-color:#1e79e0;
-$shadow-color:#2c2b2b;
-$bg-scrollbar :#636363;
 
-// colors with backgound image
-$img-bg-sidebar-wrapper : rgba(29, 29, 29, 0.8);
-$img-border-color : rgba(255, 255, 255, 0.1);
-$img-bg-footer :rgba(43, 43, 43, 0.5);
-$img-shadow-color:rgba(0, 0, 0, 0.5);
+@mixin side-bar-color($config-or-theme) {
+    $config: mat-get-color-config($config-or-theme);
+    $primary: map-get($config, primary);
+    $accent: map-get($config, accent);
+    $warn: map-get($config, warn);
+    $background: map-get($config, background);
+    $foreground: map-get($config, foreground);
+    
+    $bg-sidebar-wrapper : mat-color($background, app-bar);
+    $border-color : mat-color($background, app-bar);
+    $footer-top-border-color :mat-color($background, app-bar);
+    $color:mat-color($foreground, text);
+    $header-menu-color :mat-color($foreground, text);
+    $hover-color:mat-color($foreground, text);
+    $shadow-color:mat-color($background, app-bar);
+    $bg-scrollbar :mat-color($background, app-bar);
+
+    // colors with backgound image
+    $img-bg-sidebar-wrapper : rgba(29, 29, 29, 0.8);
+    $img-border-color : rgba(255, 255, 255, 0.1);
+    $img-bg-footer :rgba(43, 43, 43, 0.5);
+    $img-shadow-color:rgba(0, 0, 0, 0.5);
 
 
 
-.sidebar {
+    .sidebar {
 
-  background-color: $bg-sidebar-wrapper;
+        background-color: $bg-sidebar-wrapper;
 
-  .sidebar-profile,
-  .sidebar-search,
-  .sidebar-menu {
-    border-top: 1px solid $border-color;
-  }
+        .sidebar-profile,
+        .sidebar-search,
+        .sidebar-menu {
+            border-top: 1px solid $border-color;
+        }
 
-  .sidebar-search input.search-menu,
-  .sidebar-search .input-group-text {
-    border-color: $border-color;
-    box-shadow: none;
-  }
+        .sidebar-search input.search-menu,
+        .sidebar-search .input-group-text {
+            border-color: $border-color;
+            box-shadow: none;
+        }
 
-  .sidebar-profile .user-info .user-role,
-  .sidebar-profile .user-info .user-status,
-  .sidebar-search input.search-menu,
-  .sidebar-search .input-group-text,
-  .sidebar-header>a,
-  .sidebar-menu ul li a,
-  .sidebar-footer>div>a,
-  #close-sidebar {
-    color: $color;
-  }
+        .sidebar-profile .user-info .user-role,
+        .sidebar-profile .user-info .user-status,
+        .sidebar-search input.search-menu,
+        .sidebar-search .input-group-text,
+        .sidebar-header>a,
+        .sidebar-menu ul li a,
+        .sidebar-footer>div>a,
+        #close-sidebar {
+            color: $color;
+        }
 
-  .sidebar-menu ul li:hover>a,
-  .sidebar-menu .sidebar-dropdown.active>a,
-  .sidebar-profile .user-info,
-  .sidebar-header>a:hover,
-  .sidebar-footer>div>a:hover i,
-  #close-sidebar:hover {
-    color: $hover-color;
-    font-style: italic;
-  }
+        .sidebar-menu ul li:hover>a,
+        .sidebar-menu .sidebar-dropdown.active>a,
+        .sidebar-profile .user-info,
+        .sidebar-header>a:hover,
+        .sidebar-footer>div>a:hover i,
+        #close-sidebar:hover {
+            color: $hover-color;
+            font-style: italic;
+        }
 
-  ul li:hover a i,
-  .sidebar-dropdown .sidebar-submenu li a:hover:before,
-  .sidebar-search input.search-menu:focus+span,
-  .sidebar-menu .sidebar-dropdown.active a i {
-    color: $hover-color;
-    font-style: italic;
-  }
+        ul li:hover a i,
+        .sidebar-dropdown .sidebar-submenu li a:hover:before,
+        .sidebar-search input.search-menu:focus+span,
+        .sidebar-menu .sidebar-dropdown.active a i {
+            color: $hover-color;
+            font-style: italic;
+        }
 
-  .sidebar-menu ul li a i,
-  .sidebar-menu .sidebar-dropdown div,
-  .sidebar-search input.search-menu,
-  .sidebar-search .input-group-text {
-    background-color: $border-color;
-    border: none;
-    margin-left: 1px;
-  }
+        .sidebar-menu ul li a i,
+        .sidebar-menu .sidebar-dropdown div,
+        .sidebar-search input.search-menu,
+        .sidebar-search .input-group-text {
+            background-color: $border-color;
+            border: none;
+            margin-left: 1px;
+        }
 
-  .sidebar-menu .header-menu span {
-    color: $header-menu-color;
-  }
+        .sidebar-menu .header-menu span {
+            color: $header-menu-color;
+        }
 
-  .sidebar-footer {
-    background-color: $border-color;
-    box-shadow: 0px -1px 5px $shadow-color;
-    border-top: 1px solid $footer-top-border-color;
-  }
+        .sidebar-footer {
+            background-color: $border-color;
+            box-shadow: 0px -1px 5px $shadow-color;
+            border-top: 1px solid $footer-top-border-color;
+        }
 
-  .sidebar-footer>div:first-child {
-    border-left: none;
-  }
+        .sidebar-footer>div:first-child {
+            border-left: none;
+        }
 
-  .sidebar-footer>div:last-child {
-    border-right: none;
-  }
+        .sidebar-footer>div:last-child {
+            border-right: none;
+        }
 
-  // styles with background image
-  &.sidebar-bg {
+        // styles with background image
+        &.sidebar-bg {
 
-    background-image: url(/assets/img/bg1.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+            background-image: url(/assets/img/bg1.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: $img-bg-sidebar-wrapper;
+            &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $img-bg-sidebar-wrapper;
+            }
+
+            .sidebar-profile,
+            .sidebar-search,
+            .sidebar-menu {
+            border-top: 1px solid $img-border-color;
+            }
+
+            .sidebar-search input.search-menu,
+            .sidebar-search .input-group-text {
+            border-color: $img-border-color;
+            box-shadow: none;
+            }
+
+            .sidebar-menu ul li a i,
+            .sidebar-menu .sidebar-dropdown div,
+            .sidebar-search input.search-menu,
+            .sidebar-search .input-group-text {
+            background-color: $img-border-color;
+
+            }
+
+            .sidebar-footer {
+            background-color: $img-bg-footer;
+            box-shadow: 0px -1px 5px $img-bg-footer;
+            border-top: 1px solid $img-border-color;
+            }
+
+        }
+
     }
-
-    .sidebar-profile,
-    .sidebar-search,
-    .sidebar-menu {
-      border-top: 1px solid $img-border-color;
-    }
-
-    .sidebar-search input.search-menu,
-    .sidebar-search .input-group-text {
-      border-color: $img-border-color;
-      box-shadow: none;
-    }
-
-    .sidebar-menu ul li a i,
-    .sidebar-menu .sidebar-dropdown div,
-    .sidebar-search input.search-menu,
-    .sidebar-search .input-group-text {
-      background-color: $img-border-color;
-
-    }
-
-    .sidebar-footer {
-      background-color: $img-bg-footer;
-      box-shadow: 0px -1px 5px $img-bg-footer;
-      border-top: 1px solid $img-border-color;
-    }
-
-  }
-
 }
+
