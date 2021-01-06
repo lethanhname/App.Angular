@@ -1,4 +1,6 @@
-
+<h4>
+    <mat-icon>arrow_forward_ios</mat-icon> Roles
+</h4>
 <app-command-bar>
 
     <button mat-button class="app-command-bar-button" (click)="onAdd()">
@@ -8,11 +10,8 @@
 
 </app-command-bar>
 
-<app-data-table [DataTableDefines] ="dataTableDefinitions" [DataSource]="dataSource" [PageInfo]="pageInfo"
-    (OnPageSourceChanged)="OnPageSourceChanged($event)"
-    (OnSearchActions)="OnSearchActions($event)"
+<app-data-table [DataTableDefines]="dataTableDefinitions" [DataSource]="dataSource" [PageInfo]="pageInfo"
+    (OnPageSourceChanged)="OnPageSourceChanged($event)" (OnSearchActions)="OnSearchActions($event)"
     (OnRowActions)="onRowActions($event)">
 
 </app-data-table>
-    
-
