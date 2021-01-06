@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/app-core/auth/services/auth.service';
 })
 export class TopNavComponent implements OnInit {
     @Output() toggled: EventEmitter<any> = new EventEmitter<any>();
-    @Output() darktoggled: EventEmitter<any> = new EventEmitter<any>();
 
     public isUserAuthenticated = false;
     public givenName = '';
@@ -62,8 +61,5 @@ export class TopNavComponent implements OnInit {
     }
     toggleSidebar() {
         this.toggled.emit();
-    }
-    toggleDark() {
-        this.darktoggled.emit();
     }
 }

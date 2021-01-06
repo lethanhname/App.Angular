@@ -1,9 +1,9 @@
 <nav id="sidebar" class="sidebar" [ngClass]="{'sidebar-bg' : hasBackgroundImage()}">
     <div class="sidebar-content">
         <perfect-scrollbar>
-            <!-- <div class="sidebar-header">
-        <a href="#"></a>
-      </div> -->
+            <div class="sidebar-header">
+                <a href="#"><i class="fa fa-home"></i> Home</a>
+            </div>
 
             <!-- <div class="sidebar-profile">
         <div class="user-pic">
@@ -61,11 +61,11 @@
     <div class="sidebar-footer">
         <div class="dropdown" dropdown>
 
-            <a href="#" dropdownToggle>
+            <a dropdownToggle>
                 <i class="fa fa-bell"></i>
-                <span class="badge badge-pill badge-warning notification">5</span>
+                <!-- <span class="badge badge-pill badge-warning notification">5</span> -->
             </a>
-            <div class="dropdown-menu notifications" *dropdownMenu>
+            <!-- <div class="dropdown-menu notifications" *dropdownMenu>
                 <div class="notifications-header">
                     <i class="fa fa-bell"></i>
                     Notifications
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                     <div class="notification-content">
                         <div class="icon">
                             <i class="fas fa-exclamation text-info border border-info"></i>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                     <div class="notification-content">
                         <div class="icon">
                             <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
@@ -114,21 +114,21 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center" href="#">View all notifications</a>
-            </div>
+                <a class="dropdown-item text-center">View all notifications</a>
+            </div> -->
         </div>
         <div class="dropdown" dropdown>
-            <a href="#" dropdownToggle>
+            <a dropdownToggle>
                 <i class="fa fa-envelope"></i>
-                <span class="badge badge-pill badge-success notification">7</span>
+                <!-- <span class="badge badge-pill badge-success notification">7</span> -->
             </a>
-            <div class="dropdown-menu messages" *dropdownMenu>
+            <!-- <div class="dropdown-menu messages" *dropdownMenu>
                 <div class="messages-header">
                     <i class="fa fa-envelope"></i>
                     Messages
                 </div>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                     <div class="message-content">
                         <div class="pic">
                             <img src="assets/img/user.jpg" alt="">
@@ -143,7 +143,7 @@
                     </div>
 
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                     <div class="message-content">
                         <div class="pic">
                             <img src="assets/img/user.jpg" alt="">
@@ -158,7 +158,7 @@
                     </div>
 
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                     <div class="message-content">
                         <div class="pic">
                             <img src="assets/img/user.jpg" alt="">
@@ -173,23 +173,25 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-center" href="#">View all messages</a>
+                <a class="dropdown-item text-center">View all messages</a>
 
-            </div>
+            </div> -->
         </div>
         <div class="dropdown" dropdown>
-            <a href="#" dropdownToggle>
+            <a dropdownToggle>
                 <i class="fa fa-cog"></i>
                 <span class="badge-sonar"></span>
             </a>
             <div class="dropdown-menu" *dropdownMenu>
-                <a class="dropdown-item" href="#">My profile</a>
-                <a class="dropdown-item" href="#">Help</a>
-                <a class="dropdown-item" href="#">Setting</a>
+                <div class="dropdown-item">
+                    Dark Mode
+                    <mat-slide-toggle [checked]="darkMode" (click)="toggleDark()" class="ml-5">
+                    </mat-slide-toggle>
+                </div>
             </div>
         </div>
         <div>
-            <a href="#">
+            <a (click)="logout()">
                 <i class="fa fa-power-off"></i>
             </a>
         </div>

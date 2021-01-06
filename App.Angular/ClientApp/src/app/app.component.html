@@ -1,11 +1,11 @@
 <div class="page-wrapper mat-app-background" [ngClass]="{'toggled' : getSideBarState()}">
 
 
-    <app-sidebar></app-sidebar>
+    <app-sidebar [darkMode]="darkMode" (darktoggled)="darkModeTogged()"></app-sidebar>
 
     <main class="page-content">
         <nav class="navbar fixed-top ">
-            <app-top-nav class="fixed-topnav" (darktoggled)="darkModeTogged()" (toggled)="toggleSidebar()">
+            <app-top-nav class="fixed-topnav" (toggled)="toggleSidebar()">
             </app-top-nav>
         </nav>
 

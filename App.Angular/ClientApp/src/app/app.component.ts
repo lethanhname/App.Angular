@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     //     { name: 'Roles', route: 'security/role' }
     // ];
     public userAuthenticated = false;
+    darkMode = false;
     toggleControl = new FormControl(false);
     @HostBinding('class') className = '';
 
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     }
     darkModeTogged() {
+        localStorage.setItem('darkMode', (!this.toggleControl.value).toString());
         this.toggleControl.setValue(!this.toggleControl.value);
     }
 
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             .then(userAuthenticated => {
                 this.userAuthenticated = userAuthenticated;
             });
+        this.darkMode = JSON.parse(localStorage.getItem('darkMode'));
         this.toggleControl.valueChanges.subscribe((darkMode) => {
             const darkClassName = 'darkMode';
             this.className = darkMode ? darkClassName : '';
@@ -74,6 +77,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 this.overlay.getContainerElement().classList.remove(darkClassName);
             }
         });
+        this.toggleControl.setValue(this.darkMode);
     }
     ngAfterViewInit() {
     }
