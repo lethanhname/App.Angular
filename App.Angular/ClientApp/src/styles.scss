@@ -73,3 +73,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
   opacity: .5;
 
 }
+#DialogSpinnerComponent {
+  box-shadow: none !important;
+  background: transparent !important;
+}

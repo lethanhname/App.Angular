@@ -9,22 +9,23 @@ import { StockGroupListComponent } from './stock-group/containers/stock-group-li
 import { StockGroupUpdateComponent } from './stock-group/containers/stock-group-update/stock-group-update.component';
 import { StockTypeListComponent } from './stock-type/containers/stock-type-list/stock-type-list.component';
 import { StockTypeUpdateComponent } from './stock-type/containers/stock-type-update/stock-type-update.component';
-
+import { DialogSpinnerModule } from '../app-core/dialog-spinner/dialog-spinner.module';
 @NgModule({
-  declarations: [
-    StockGroupListComponent,
-    StockGroupUpdateComponent,
-    StockTypeListComponent,
-    StockTypeUpdateComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedMaterialModule,
-    DataTableModule,
-    FormControlsModule,
-    CoreCommonModule,
+    declarations: [
+        StockGroupListComponent,
+        StockGroupUpdateComponent,
+        StockTypeListComponent,
+        StockTypeUpdateComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedMaterialModule,
+        DataTableModule,
+        FormControlsModule,
+        CoreCommonModule,
+        DialogSpinnerModule,
 
-    AppProductRoutingModule
-  ],
+        AppProductRoutingModule
+    ],
 })
 export class AppProductModule { }
