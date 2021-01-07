@@ -26,6 +26,31 @@
                         <span>Json</span>
                     </a>
                 </mat-menu>
+
+                <button mat-icon-button class="export-button" #trigger="matMenuTrigger"
+                    [matMenuTriggerFor]="columnSelect">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #columnSelect="matMenu" [hasBackdrop]="false">
+                    <div class="menu-form-wrapper" (click)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()">
+                        <form [formGroup]="columnSelectForm" class="menu-form">
+                            <ng-container *ngFor="let column of DataTableDefines.columns">
+                                <div *ngIf="column.isVisible" class="demo-full-width margin-top">
+                                    <mat-checkbox [formControlName]="column.columnDef">{{column.header}}
+                                    </mat-checkbox>
+                                </div>
+                            </ng-container>
+                            <span>
+                                <button mat-raised-button (click)="trigger.closeMenu(); onSubmit();">OK</button>
+                                &nbsp;
+                                <button mat-raised-button (click)="trigger.closeMenu()">Cancel</button>
+                            </span>
+                        </form>
+                    </div>
+
+
+                </mat-menu>
             </div>
         </div>
     </div>
@@ -90,8 +115,8 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="DataTableDefines.displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: DataTableDefines.displayedColumns;"></mat-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns$ | async"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns$ | async"></mat-row>
         </mat-table>
 
     </div>
