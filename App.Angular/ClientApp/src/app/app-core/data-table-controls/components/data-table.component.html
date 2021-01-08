@@ -29,7 +29,7 @@
 
                 <button mat-icon-button class="export-button" #trigger="matMenuTrigger"
                     [matMenuTriggerFor]="columnSelect">
-                    <mat-icon>more_vert</mat-icon>
+                    <mat-icon>settings_applications</mat-icon>
                 </button>
                 <mat-menu #columnSelect="matMenu" [hasBackdrop]="false">
                     <div class="menu-form-wrapper" (click)="$event.stopPropagation()"
@@ -41,10 +41,11 @@
                                     </mat-checkbox>
                                 </div>
                             </ng-container>
-                            <span>
-                                <button mat-raised-button (click)="trigger.closeMenu(); onSubmit();">OK</button>
+                            <span class="mt-3">
+                                <button mat-button color="primary"
+                                    (click)="trigger.closeMenu(); onSubmit();">OK</button>
                                 &nbsp;
-                                <button mat-raised-button (click)="trigger.closeMenu()">Cancel</button>
+                                <button mat-button color="primary" (click)="trigger.closeMenu()">Cancel</button>
                             </span>
                         </form>
                     </div>
@@ -98,15 +99,17 @@
                 <mat-cell *matCellDef="let row">
                     <div class="rowActions">
                         <div *ngFor="let action of DataTableDefines.rowActions">
-                            <button *ngIf="action.primaryAction" class="mr-2" type="submit" mat-flat-button
-                                color="primary" (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+                            <button *ngIf="action.primaryAction" class="mr-2" type="submit" mat-button color="primary"
+                                (click)="RowActions(action,row)">{{action.actionLabel}}</button>
                         </div>
                         <ng-container *ngIf="DataTableDefines.showNonePrimaryAction">
-                            <button mat-flat-button [matMenuTriggerFor]="belowMenu">...</button>
+                            <button mat-icon-button [matMenuTriggerFor]="belowMenu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
                             <mat-menu #belowMenu="matMenu" yPosition="below">
                                 <ng-container *ngFor="let action of DataTableDefines.rowActions">
-                                    <button *ngIf="!action.primaryAction" mat-menu-item
-                                        (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+                                    <a *ngIf="!action.primaryAction" mat-menu-item
+                                        (click)="RowActions(action,row)">{{action.actionLabel}}</a>
                                 </ng-container>
                             </mat-menu>
                         </ng-container>

@@ -29,10 +29,10 @@ export class StockGroupService {
         const gridDefinitions: DataTableDefine = {
             columns,
             displayedColumns,
-            showNonePrimaryAction: false,
+            showNonePrimaryAction: true,
             rowActions: [
                 { actionKey: 'Edit', actionLabel: 'Edit', primaryAction: true },
-                { actionKey: 'Delete', actionLabel: 'Delete', primaryAction: true }
+                { actionKey: 'Delete', actionLabel: 'Delete', primaryAction: false }
             ]
         };
         return gridDefinitions;
