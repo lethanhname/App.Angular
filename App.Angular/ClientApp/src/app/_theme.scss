@@ -34,10 +34,27 @@ $angular-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
     }
 
 }
+
+@mixin data-table-color($config-or-theme) {
+    $config: mat-get-color-config($config-or-theme);
+    $foreground: map-get($config, foreground);
+    $accent: map-get($config, accent);
+    $background: map-get($config, background);
+        
+    .mat-row.hovered {
+    background: mat-color($background, app-bar);
+    }
+
+    .mat-row.highlighted {
+    background: mat-color($background, app-bar);
+    }
+}
 .darkMode {
   @include angular-material-color($angular-dark-theme);
   @include side-bar-color($angular-dark-theme);
   @include select2-color($angular-dark-theme);
+  @include data-table-color($angular-dark-theme);
 }
 @include side-bar-color($app-theme);
 @include select2-color($app-theme);
+@include data-table-color($app-theme);

@@ -73,6 +73,9 @@ export class DataTableComponent implements DoCheck, OnInit {
         if (this.DataTableDefines.displayedColumns.includes('actions')) {
             columns.push('actions');
         }
+        if (this.DataTableDefines.displayedColumns.includes('select')) {
+            columns.push('select');
+        }
         this.displayedColumns$ = of(columns);
     }
     ngDoCheck() {

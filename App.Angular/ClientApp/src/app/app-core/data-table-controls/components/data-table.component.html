@@ -68,8 +68,8 @@
                     </mat-checkbox>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)">
+                    <mat-checkbox class="mr-3" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
                     </mat-checkbox>
                 </mat-cell>
             </ng-container>
@@ -119,7 +119,10 @@
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns$ | async"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns$ | async"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns$ | async"
+                [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true"
+                (mouseout)="row.hovered = false"></mat-row>
         </mat-table>
 
     </div>
