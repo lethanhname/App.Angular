@@ -50,3 +50,10 @@ import { NgxdModule } from '@ngxd/core';
 
 dotnet nuget add source "https://nuget.pkg.github.com/lethanhname/index.json" -n github -u "lethanhnam010490@gmail.com" -p "2ba66669f42bf54bce06eb622033d3bafb48f1fa" --store-password-in-clear-text
 ```
+# Docker
+https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
+
+```
+    docker-compose up -d 
+    docker-compose stop
+```
