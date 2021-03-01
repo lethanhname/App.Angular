@@ -46,4 +46,7 @@ import { NgxdModule } from '@ngxd/core';
     -u ${{ env.GITHUB_USER }} \
     -p ${{ env.GITHUB_TOKEN }} \
     --store-password-in-clear-text
+
+
+dotnet nuget add source "https://nuget.pkg.github.com/lethanhname/index.json" -n github -u "lethanhnam010490@gmail.com" -p "2ba66669f42bf54bce06eb622033d3bafb48f1fa" --store-password-in-clear-text
 ```
