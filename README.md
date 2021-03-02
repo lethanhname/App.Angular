@@ -54,6 +54,7 @@ https://docs.docker.com/compose/gettingstarted/
 https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
 
 ```
+    docker-compose build
     docker-compose up -d 
     docker-compose down --volumes
     
