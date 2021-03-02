@@ -40,6 +40,7 @@ import { NgxdModule } from '@ngxd/core';
 ```
 
 # Ensure GitHub NuGet Source
+
 ```
     dotnet nuget add source ${{ env.NUGET_URL }} \
     -n github \
@@ -47,7 +48,7 @@ import { NgxdModule } from '@ngxd/core';
     -p ${{ env.GITHUB_TOKEN }} \
     --store-password-in-clear-text
 
-dotnet nuget add source "https://nuget.pkg.github.com/lethanhname/index.json" -n github -u "lethanhnam010490@gmail.com" -p "09fb1aea7ac9a91316a087584cb3148ec8621185" --store-password-in-clear-text
+    dotnet nuget add source "https://nuget.pkg.github.com/lethanhname/index.json" -n github -u "lethanhnam010490@gmail.com" -p "09fb1aea7ac9a91316a087584cb3148ec8621185" --store-password-in-clear-text
 ```
 # Docker
 https://docs.docker.com/compose/gettingstarted/
@@ -59,4 +60,30 @@ https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
     docker-compose down --volumes
     
     docker-compose stop && docker-compose rm -f
+=======
+```
+
+# Tools
+**dotnet-sdk-3.1.3-win-x64
+```
+dotnet tool install --global dotnet-ef --version 3.1.3
+
+dotnet ef migrations add Init --context AppDbContext --output-dir Migrations
+dotnet ef database update
+
+dotnet ef dbcontext list
+dotnet ef migrations remove --context AppDbContext 
+```
+# VSCode setting 
+```
+{
+    "editor.renderWhitespace": "all",
+    "explorer.confirmDelete": false,
+    "window.menuBarVisibility": "default",
+    "explorer.confirmDragAndDrop": false,
+    "editor.renderIndentGuides": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+}
 ```

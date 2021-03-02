@@ -1,82 +1,129 @@
 ﻿<div>
     <div class="row">
-        <div class="col-6">
-            
-        </div>
-        <div class="col-6">
+        <div class="col-sm-5">
             <mat-form-field>
                 <mat-label>Search</mat-label>
                 <input matInput type="text" [(ngModel)]="searchingText" (keyup.enter)="search()">
-                <button mat-button matSuffix mat-icon-button (click)="search()">
-                    <mat-icon>search</mat-icon>
-                  </button>
-            </mat-form-field>    
+                <!-- <button mat-button matPrefix mat-icon-button (click)="search()"> -->
+                <mat-icon matSuffix>search</mat-icon>
+                <!-- </button> -->
+            </mat-form-field>
         </div>
-                    
+        <div class="col-sm-7">
+            <div class="float-right">
+                <button mat-button class="export-button" [matMenuTriggerFor]="menuExport">
+                    <mat-icon>get_app</mat-icon>
+                    <span> Export</span>
+                </button>
+                <mat-menu #menuExport="matMenu">
+                    <a mat-menu-item (click)="exporter.exportTable('xlsx', {fileName:'ExportData', sheet: 'Data'})">
+                        <span>Excel</span>
+                    </a>
+                    <a mat-menu-item (click)="exporter.exportTable('csv', {fileName:'ExportData'})">
+                        <span>CSV</span>
+                    </a>
+                    <a mat-menu-item (click)="exporter.exportTable('json', {fileName:'ExportData'})">
+                        <span>Json</span>
+                    </a>
+                </mat-menu>
+
+                <button mat-icon-button class="export-button" #trigger="matMenuTrigger"
+                    [matMenuTriggerFor]="columnSelect">
+                    <mat-icon>settings_applications</mat-icon>
+                </button>
+                <mat-menu #columnSelect="matMenu" [hasBackdrop]="false">
+                    <div class="menu-form-wrapper" (click)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()">
+                        <form [formGroup]="columnSelectForm" class="menu-form">
+                            <ng-container *ngFor="let column of DataTableDefines.columns">
+                                <div *ngIf="column.isVisible" class="demo-full-width margin-top">
+                                    <mat-checkbox [formControlName]="column.columnDef">{{column.header}}
+                                    </mat-checkbox>
+                                </div>
+                            </ng-container>
+                            <span class="mt-3">
+                                <button mat-button color="primary"
+                                    (click)="trigger.closeMenu(); onSubmit();">OK</button>
+                                &nbsp;
+                                <button mat-button color="primary" (click)="trigger.closeMenu()">Cancel</button>
+                            </span>
+                        </form>
+                    </div>
+
+
+                </mat-menu>
+            </div>
+        </div>
     </div>
 
     <div class="table-responsive">
-      
-    <mat-table #table [dataSource]="GridSource" (matSortChange)="onSortChange($event)" matSort>
-        <ng-container matColumnDef="select">
-            <mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()">
-                </mat-checkbox>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)">
-                </mat-checkbox>
-            </mat-cell>
-        </ng-container>
-        <!-- Generic column definition -->
-        <ng-container *ngFor="let column of DataTableDefines.columns" [cdkColumnDef]="column.columnDef">
-            <mat-header-cell *cdkHeaderCellDef>
-                <div mat-sort-header>{{ column.header }}</div>
-            </mat-header-cell>
 
-            <mat-cell *cdkCellDef="let row">
-                <span *ngIf="column.dataType == DataColumnType.DateTime">
-                    {{ column.cell(row) | date: column.dataFormat }}
-                </span>
-                <span *ngIf="column.dataType == DataColumnType.Text">
-                    {{ column.cell(row) }}
-                </span>
-                <mat-checkbox *ngIf="column.dataType == DataColumnType.Bool" disabled [checked]="column.cell(row)">
-                </mat-checkbox>
+        <mat-table matTableExporter [dataSource]="GridSource" (matSortChange)="onSortChange($event)" matSort
+            #exporter="matTableExporter">
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox class="mr-3" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            <!-- Generic column definition -->
+            <ng-container *ngFor="let column of DataTableDefines.columns" [cdkColumnDef]="column.columnDef">
+                <mat-header-cell *cdkHeaderCellDef>
+                    <div mat-sort-header>{{ column.header }}</div>
+                </mat-header-cell>
 
-            </mat-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <span *ngIf="column.dataType == DataColumnType.DateTime">
+                        {{ column.cell(row) | date: column.dataFormat }}
+                    </span>
+                    <span *ngIf="column.dataType == DataColumnType.Text">
+                        {{ column.cell(row) }}
+                    </span>
+                    <mat-checkbox *ngIf="column.dataType == DataColumnType.Bool" disabled [checked]="column.cell(row)">
+                    </mat-checkbox>
 
-        </ng-container>
+                </mat-cell>
 
-        <ng-container *ngIf="DataTableDefines.rowActions.length >0" matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <div class="rowActions">
-                    <div *ngFor="let action of DataTableDefines.rowActions">
-                        <button *ngIf="action.primaryAction" class="mr-2" type="submit" mat-flat-button color="primary"
-                            (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+            </ng-container>
+
+            <ng-container *ngIf="DataTableDefines.rowActions.length >0" matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <div class="rowActions">
+                        <div *ngFor="let action of DataTableDefines.rowActions">
+                            <button *ngIf="action.primaryAction" class="mr-2" type="submit" mat-button color="primary"
+                                (click)="RowActions(action,row)">{{action.actionLabel}}</button>
+                        </div>
+                        <ng-container *ngIf="DataTableDefines.showNonePrimaryAction">
+                            <button mat-icon-button [matMenuTriggerFor]="belowMenu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #belowMenu="matMenu" yPosition="below">
+                                <ng-container *ngFor="let action of DataTableDefines.rowActions">
+                                    <a *ngIf="!action.primaryAction" mat-menu-item
+                                        (click)="RowActions(action,row)">{{action.actionLabel}}</a>
+                                </ng-container>
+                            </mat-menu>
+                        </ng-container>
+
                     </div>
-                    <ng-container *ngIf="DataTableDefines.showNonePrimaryAction">
-                        <button mat-flat-button [matMenuTriggerFor]="belowMenu">...</button>
-                        <mat-menu #belowMenu="matMenu" yPosition="below">
-                            <ng-container *ngFor="let action of DataTableDefines.rowActions">
-                                <button *ngIf="!action.primaryAction" mat-menu-item
-                                    (click)="RowActions(action,row)">{{action.actionLabel}}</button>
-                            </ng-container>
-                        </mat-menu>
-                    </ng-container>
+                </mat-cell>
+            </ng-container>
 
-                </div>
-            </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="DataTableDefines.displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: DataTableDefines.displayedColumns;"></mat-row>
-    </mat-table>
+            <mat-header-row *matHeaderRowDef="displayedColumns$ | async"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns$ | async"
+                [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                (click)="row.highlighted = !row.highlighted" (mouseover)="row.hovered = true"
+                (mouseout)="row.hovered = false"></mat-row>
+        </mat-table>
 
     </div>
     <div>
@@ -89,4 +136,3 @@
     </div>
 
 </div>
-

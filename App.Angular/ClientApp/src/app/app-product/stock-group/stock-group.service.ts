@@ -18,10 +18,10 @@ export class StockGroupService {
 
     getDataTableDefinitions() {
         const columns: ColumnDefine[] = [
-            new ColumnDefine({ columnDef: 'code', header: 'code', isVisible: true }),
-            new ColumnDefine({ columnDef: 'description', header: 'description', isVisible: true }),
-            new ColumnDefine({ columnDef: 'isActive', header: 'isActive', dataType: DataType.Bool, isVisible: true }),
-            new ColumnDefine({ columnDef: 'rowVersion', header: 'rowVersion', isVisible: true })
+            new ColumnDefine({ columnDef: 'code', header: 'Id', isVisible: true }),
+            new ColumnDefine({ columnDef: 'description', header: 'Description', isVisible: true }),
+            new ColumnDefine({ columnDef: 'isActive', header: 'Active', dataType: DataType.Bool, isVisible: true }),
+            new ColumnDefine({ columnDef: 'rowVersion', header: 'rowVersion', isVisible: false })
         ];
 
         const displayedColumns = ['code', 'isActive', 'description', 'actions'];
@@ -29,17 +29,17 @@ export class StockGroupService {
         const gridDefinitions: DataTableDefine = {
             columns,
             displayedColumns,
-            showNonePrimaryAction: false,
+            showNonePrimaryAction: true,
             rowActions: [
                 { actionKey: 'Edit', actionLabel: 'Edit', primaryAction: true },
-                { actionKey: 'Delete', actionLabel: 'Delete', primaryAction: true }
+                { actionKey: 'Delete', actionLabel: 'Delete', primaryAction: false }
             ]
         };
         return gridDefinitions;
     }
 
-    get( pageIndex: number, pageSize: number, sortedColumn: string, sortDirection: string, searchValue: string)
-    : Observable<any> {
+    get(pageIndex: number, pageSize: number, sortedColumn: string, sortDirection: string, searchValue: string)
+        : Observable<any> {
 
         const skip = pageSize * pageIndex;
         return this.http.get(this.serviceUrl, {
@@ -65,19 +65,19 @@ export class StockGroupService {
             }));
     }
     public delete(code: string): Observable<any> {
-      const body: string = JSON.stringify(code);
+        const body: string = JSON.stringify(code);
 
-      // Sends an authenticated request.
-      return this.http.post('/api/StockGroupApi/Delete', body).pipe(
-          map((response: Response) => {
-              return response;
-          }),
-          catchError((error: any) => {
-              return throwError(error);
-          }));
+        // Sends an authenticated request.
+        return this.http.post('/api/StockGroupApi/Delete', body).pipe(
+            map((response: Response) => {
+                return response;
+            }),
+            catchError((error: any) => {
+                return throwError(error);
+            }));
     }
 
-    getControls(model: StockGroup){
+    getControls(model: StockGroup) {
         const regConfig: FieldConfig[] = [
             {
                 type: 'input',
@@ -93,9 +93,9 @@ export class StockGroupService {
                         message: 'code Required'
                     },
                     {
-                      name: 'maxlength',
-                      validator: Validators.maxLength(20),
-                      message: 'The max length is 20'
+                        name: 'maxlength',
+                        validator: Validators.maxLength(20),
+                        message: 'The max length is 20'
                     }
                 ]
             },
@@ -107,12 +107,12 @@ export class StockGroupService {
                 value: model.description,
                 hidden: false,
                 validations: [
-                  {
-                    name: 'maxlength',
-                    validator: Validators.maxLength(200),
-                    message: 'The max length is 200'
-                  }
-              ]
+                    {
+                        name: 'maxlength',
+                        validator: Validators.maxLength(200),
+                        message: 'The max length is 200'
+                    }
+                ]
             },
             {
                 type: 'checkbox',

@@ -32,24 +32,24 @@ export class TopNavComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.authenticationService.loginChanged
-      .subscribe(res => {
-        this.isUserAuthenticated = res;
-        this.getDisplayName();
-        if (!this.isUserAuthenticated){
-          // this.router.navigate(['/'], { replaceUrl: true });
-          this.login();
-        }
+        this.authenticationService.loginChanged
+            .subscribe(res => {
+                this.isUserAuthenticated = res;
+                this.getDisplayName();
+                if (!this.isUserAuthenticated) {
+                    // this.router.navigate(['/'], { replaceUrl: true });
+                    this.login();
+                }
 
-      });
+            });
     }
 
 
     public getDisplayName = () => {
-      return this.authenticationService.getDisplayName()
-      .then(res => {
-        this.givenName = res;
-      });
+        return this.authenticationService.getDisplayName()
+            .then(res => {
+                this.givenName = res;
+            });
     }
 
     public logout() {

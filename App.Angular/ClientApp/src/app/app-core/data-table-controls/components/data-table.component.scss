@@ -20,15 +20,29 @@
   .mat-header-row {
       display: table-row;
   }
+  
   .mat-cell,
   .mat-header-cell {
       word-wrap: initial;
       display: table-cell;
-      padding: 0px 5px;
+    //   padding: 0px 5px;
       line-break: unset;
       width: auto;
       white-space: nowrap;
       overflow: hidden;
       vertical-align: middle;
   }
+}
+.export-button {
+    margin-top: 23px;
+  }
+  
+.menu-form-wrapper .mat-menu-content:not(:empty) {
+  padding: 0;
+}
+
+.menu-form-wrapper .menu-form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
 }

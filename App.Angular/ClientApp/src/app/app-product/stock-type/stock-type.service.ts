@@ -41,8 +41,8 @@ export class StockTypeService {
         return gridDefinitions;
     }
 
-    get( pageIndex: number, pageSize: number, sortedColumn: string, sortDirection: string, searchValue: string)
-    : Observable<any> {
+    get(pageIndex: number, pageSize: number, sortedColumn: string, sortDirection: string, searchValue: string)
+        : Observable<any> {
 
         const skip = pageSize * pageIndex;
         return this.http.get(this.serviceUrl, {
@@ -68,24 +68,24 @@ export class StockTypeService {
             }));
     }
     public delete(code: string): Observable<any> {
-      const body: string = JSON.stringify(code);
+        const body: string = JSON.stringify(code);
 
-      // Sends an authenticated request.
-      return this.http.post('/api/StockTypeApi/Delete', body).pipe(
-          map((response: Response) => {
-              return response;
-          }),
-          catchError((error: any) => {
-              return throwError(error);
-          }));
+        // Sends an authenticated request.
+        return this.http.post('/api/StockTypeApi/Delete', body).pipe(
+            map((response: Response) => {
+                return response;
+            }),
+            catchError((error: any) => {
+                return throwError(error);
+            }));
     }
 
-    getControls(model: StockType){
+    getControls(model: StockType) {
         const selectedStockGroup: StockGroup = {
-          code: model.stockGroupCode,
-          description: model.stockGroupCodeDesc,
-          isActive: true,
-          rowVersion: 0
+            code: model.stockGroupCode,
+            description: model.stockGroupCodeDesc,
+            isActive: true,
+            rowVersion: 0
         };
         const regConfig: FieldConfig[] = [
             {
@@ -102,9 +102,9 @@ export class StockTypeService {
                         message: 'code Required'
                     },
                     {
-                      name: 'maxlength',
-                      validator: Validators.maxLength(20),
-                      message: 'The max length is 20'
+                        name: 'maxlength',
+                        validator: Validators.maxLength(20),
+                        message: 'The max length is 20'
                     }
                 ]
             },
@@ -116,33 +116,33 @@ export class StockTypeService {
                 value: model.description,
                 hidden: false,
                 validations: [
-                  {
-                    name: 'maxlength',
-                    validator: Validators.maxLength(200),
-                    message: 'The max length is 200'
-                  }
-              ]
+                    {
+                        name: 'maxlength',
+                        validator: Validators.maxLength(200),
+                        message: 'The max length is 200'
+                    }
+                ]
             },
             {
-              type: 'select',
-              selectDataUrl: '/api/StockGroupApi/GetAll',
-              selectBindValue: 'code',
-              selectBindLabel: 'description',
-              selectTemplate: 'stockGroupTemplate',
-              label: 'StockGroup',
-              inputType: '',
-              name: 'stockGroupCode',
-              value: model.stockGroupCode,
-              selectedItem: selectedStockGroup,
-              hidden: false,
-              validations: [
-                {
-                  name: 'maxlength',
-                  validator: Validators.maxLength(200),
-                  message: 'The max length is 200'
-                }
-              ]
-           },
+                type: 'select',
+                selectDataUrl: '/api/StockGroupApi/GetAll',
+                selectBindValue: 'code',
+                selectBindLabel: 'description',
+                selectTemplate: 'stockGroupTemplate',
+                label: 'StockGroup',
+                inputType: '',
+                name: 'stockGroupCode',
+                value: model.stockGroupCode,
+                selectedItem: selectedStockGroup,
+                hidden: false,
+                validations: [
+                    {
+                        name: 'maxlength',
+                        validator: Validators.maxLength(200),
+                        message: 'The max length is 200'
+                    }
+                ]
+            },
             {
                 type: 'checkbox',
                 label: 'isActive',

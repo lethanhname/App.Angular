@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/app-core/auth/services/auth.service';
 // import { MenusService } from './menus.service';
 
 @Component({
@@ -17,10 +18,13 @@ import { Router } from '@angular/router';
     ]
 })
 export class SidebarComponent implements OnInit {
+    @Input() darkMode: boolean;
+    @Output() darktoggled: EventEmitter<any> = new EventEmitter<any>();
     menus: any;
-    constructor(public sidebarservice: SidebarService, public router: Router) {
+    constructor(public sidebarservice: SidebarService, public router: Router,
+        private authenticationService: AuthService) {
         sidebarservice.getMenuList().subscribe(source => {
-          this.menus = source;
+            this.menus = source;
         });
     }
 
@@ -59,4 +63,10 @@ export class SidebarComponent implements OnInit {
         return this.sidebarservice.hasBackgroundImage;
     }
 
+    public logout() {
+        this.authenticationService.startSignout();
+    }
+    toggleDark() {
+        this.darktoggled.emit();
+    }
 }

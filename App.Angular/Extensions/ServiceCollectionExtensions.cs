@@ -102,27 +102,27 @@ namespace App.WebAngular.Extensions
             // }
             // else
             // {
-                services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                    .AddIdentityServerAuthentication(options =>
-                    {
-                        options.Authority = "https://localhost:5001/";
-                        options.RequireHttpsMetadata = false;
-                        options.ApiName = "WebAPI";
-                        options.ApiSecret = "webApiSecret";
-                    });
-                    services.AddCors(options =>
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = Globals.ServerPath;
+                    options.RequireHttpsMetadata = false;
+                    options.ApiName = "WebAPI";
+                    options.ApiSecret = "webApiSecret";
+                });
+            services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAllOrigins",
+            builder =>
             {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                       builder
-                            .AllowCredentials()
-                            .WithOrigins("https://localhost:5001")
-                            .SetIsOriginAllowedToAllowWildcardSubdomains()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
+                builder
+                             .AllowCredentials()
+                             .WithOrigins(Globals.ServerPath)
+                             .SetIsOriginAllowedToAllowWildcardSubdomains()
+                             .AllowAnyHeader()
+                             .AllowAnyMethod();
             });
+    });
             // }
             services.ConfigureApplicationCookie(options =>
             {

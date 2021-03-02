@@ -1,12 +1,60 @@
 @import '~@angular/material/theming';
+@import './app-common/sidebar/sidebar.component.scss';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker hue.
-$app-primary: mat-palette($mat-indigo);
-$app-accent: mat-palette($mat-green);
-
+$app-primary: mat-palette($mat-blue-grey);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $app-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+$angular-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+
+@mixin select2-color($config-or-theme) {
+    $config: mat-get-color-config($config-or-theme);
+    $foreground: map-get($config, foreground);
+    
+    .ng-select .ng-select-container {
+        color: mat-color($foreground, text);
+    }
+    .ng-select .ng-select-container .ng-value-container .ng-placeholder{
+        color: mat-color($foreground, secondary-text);
+    }
+
+}
+
+@mixin data-table-color($config-or-theme) {
+    $config: mat-get-color-config($config-or-theme);
+    $foreground: map-get($config, foreground);
+    $accent: map-get($config, accent);
+    $background: map-get($config, background);
+        
+    .mat-row.hovered {
+    background: mat-color($background, app-bar);
+    }
+
+    .mat-row.highlighted {
+    background: mat-color($background, app-bar);
+    }
+}
+.darkMode {
+  @include angular-material-color($angular-dark-theme);
+  @include side-bar-color($angular-dark-theme);
+  @include select2-color($angular-dark-theme);
+  @include data-table-color($angular-dark-theme);
+}
+@include side-bar-color($app-theme);
+@include select2-color($app-theme);
+@include data-table-color($app-theme);
