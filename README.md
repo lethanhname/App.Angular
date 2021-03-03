@@ -1,6 +1,6 @@
 # mklink bin directory for development
 ```
-    mklink /J "app\bin" "App.Angular\bin"
+    mklink /J "app\bin" "App.Angular\Plugins"
 ```
 [The Complete Guide to Creating Symbolic Links](https://www.howtogeek.com/howto/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/)
 # Angular command
@@ -62,9 +62,16 @@ https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
     docker-compose down --volumes
     
     docker-compose stop && docker-compose rm -f
-=======
+
 ```
 
+https://www.percona.com/blog/2017/05/23/how-to-save-and-load-docker-images/
+```
+docker save aspnetcoreapp > aspnetcoreapp.tar
+
+docker load <aspnetcoreapp.tar
+
+```
 # Tools
 **dotnet-sdk-3.1.3-win-x64
 ```
