@@ -67,9 +67,8 @@ https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
 
 https://www.percona.com/blog/2017/05/23/how-to-save-and-load-docker-images/
 ```
-docker save aspnetcoreapp > aspnetcoreapp.tar
-
-docker load <aspnetcoreapp.tar
+docker save image -o tmp.tar
+docker load -i tmp.tar
 
 ```
 # Tools
