@@ -51,6 +51,8 @@ import { NgxdModule } from '@ngxd/core';
     dotnet nuget add source "https://nuget.pkg.github.com/lethanhname/index.json" -n github -u "lethanhnam010490@gmail.com" -p "09fb1aea7ac9a91316a087584cb3148ec8621185" --store-password-in-clear-text
 ```
 # Docker
+https://medium.com/@waelkdouh/developing-a-dockerized-asp-net-core-application-using-visual-studio-code-6ccfc59d6f6
+
 https://docs.docker.com/compose/gettingstarted/
 https://www.thegeekstuff.com/2016/04/docker-compose-up-stop-rm/
 
